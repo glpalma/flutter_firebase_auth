@@ -20,6 +20,11 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
+  Future<void> createUserWithEmail(String email, String password) {
+    return _firebaseDatasource.createUserWithEmail(email, password);
+  }
+
+  @override
   Stream<UserEntity?> getAuthStateChanges() {
     return _firebaseDatasource.getAuthStateChanges().map(
       (event) => event?.toEntity(),

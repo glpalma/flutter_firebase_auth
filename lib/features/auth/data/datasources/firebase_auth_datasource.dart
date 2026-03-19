@@ -14,6 +14,10 @@ class FirebaseAuthDatasource {
       return _firebaseAuth.signOut();
     }
 
+    Future<void> createUserWithEmail(String email, String password) {
+      return _firebaseAuth.createUserWithEmailAndPassword(email: email, password: password);
+    }
+
     Stream<User?> getAuthStateChanges() {
       return _firebaseAuth.authStateChanges();
     }

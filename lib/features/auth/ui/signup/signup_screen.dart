@@ -1,24 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_firebase_auth/core/di/injection_container.dart';
-import 'package:flutter_firebase_auth/features/auth/ui/login/login_viewmodel.dart';
-import 'package:flutter_firebase_auth/features/auth/ui/signup/signup_screen.dart';
+import 'package:flutter_firebase_auth/features/auth/ui/signup/signup_viewmodel.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+class SignupScreen extends StatefulWidget {
+  const SignupScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<SignupScreen> createState() => _SignupScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
-  late final LoginViewModel _viewModel;
+class _SignupScreenState extends State<SignupScreen> {
+  late final SignupViewModel _viewModel;
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
 
   @override
   void initState() {
     super.initState();
-    _viewModel = sl<LoginViewModel>();
+    _viewModel = sl<SignupViewModel>();
   }
 
   @override
@@ -31,6 +30,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24),
@@ -42,7 +42,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   Text(
-                    'Sign In',
+                    'Create Account',
                     style: Theme.of(context).textTheme.headlineMedium,
                     textAlign: TextAlign.center,
                   ),
@@ -61,7 +61,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     controller: _passwordController,
                     obscureText: true,
                     textInputAction: TextInputAction.done,
-                    onSubmitted: (_) => _viewModel.signInWithEmail(
+                    onSubmitted: (_) => _viewModel.signUpWithEmail(
                       _emailController.text.trim(),
                       _passwordController.text,
                     ),
@@ -83,21 +83,12 @@ class _LoginScreenState extends State<LoginScreen> {
                   _viewModel.isLoading
                       ? const Center(child: CircularProgressIndicator())
                       : ElevatedButton(
-                          onPressed: () => _viewModel.signInWithEmail(
+                          onPressed: () => _viewModel.signUpWithEmail(
                             _emailController.text.trim(),
                             _passwordController.text,
                           ),
-                          child: const Text('Sign In'),
+                          child: const Text('Create Account'),
                         ),
-                  const SizedBox(height: 16),
-                  TextButton(
-                    onPressed: () => Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (_) => const SignupScreen(),
-                      ),
-                    ),
-                    child: const Text("Don't have an account? Sign up"),
-                  ),
                 ],
               );
             },

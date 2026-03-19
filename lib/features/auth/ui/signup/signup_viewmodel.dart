@@ -1,28 +1,28 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_firebase_auth/core/error/failures.dart';
 import 'package:flutter_firebase_auth/features/auth/domain/usecases/sign_in_with_email.dart';
+import 'package:flutter_firebase_auth/features/auth/domain/usecases/sign_up_with_email.dart';
 
-class LoginViewModel extends ChangeNotifier {
-  final SignInWithEmail _signInWithEmail;
+class SignupViewModel extends ChangeNotifier {
+  final SignUpWithEmail _signUpWithEmail;
 
-  LoginViewModel({required SignInWithEmail signInWithEmail})
-    : _signInWithEmail = signInWithEmail;
+  SignupViewModel({required SignUpWithEmail signUpWithEmail})
+      : _signUpWithEmail = signUpWithEmail;
 
   bool isLoading = false;
   String? errorMessage;
 
-  Future<void> signInWithEmail(String email, String password) async {
+  Future<void> signUpWithEmail(String email, String password) async {
     isLoading = true;
     errorMessage = null;
     notifyListeners();
 
     try {
-      await _signInWithEmail.call(
+      await _signUpWithEmail.call(
         SignInParams(email: email, password: password),
       );
     } catch (e) {
       errorMessage = e.toString();
-      print(e);
     } finally {
       isLoading = false;
       notifyListeners();

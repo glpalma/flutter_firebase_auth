@@ -7,8 +7,10 @@ import '../../features/auth/domain/repositories/auth_repository.dart';
 import '../../features/auth/domain/usecases/get_auth_state.dart';
 import '../../features/auth/domain/usecases/sign_in_with_email.dart';
 import '../../features/auth/domain/usecases/sign_out.dart';
+import '../../features/auth/domain/usecases/sign_up_with_email.dart';
 import '../../features/auth/ui/auth_viewmodel.dart';
 import '../../features/auth/ui/login/login_viewmodel.dart';
+import '../../features/auth/ui/signup/signup_viewmodel.dart';
 
 final GetIt sl = GetIt.instance;
 
@@ -27,6 +29,7 @@ void setupDependencies() {
 
   // Use cases
   sl.registerLazySingleton(() => SignInWithEmail(repository: sl()));
+  sl.registerLazySingleton(() => SignUpWithEmail(repository: sl()));
   sl.registerLazySingleton(() => SignOut(repository: sl()));
   sl.registerLazySingleton(() => GetAuthState(repository: sl()));
 
@@ -35,4 +38,5 @@ void setupDependencies() {
     () => AuthViewModel(getAuthState: sl(), signOut: sl()),
   );
   sl.registerFactory(() => LoginViewModel(signInWithEmail: sl()));
+  sl.registerFactory(() => SignupViewModel(signUpWithEmail: sl()));
 }
