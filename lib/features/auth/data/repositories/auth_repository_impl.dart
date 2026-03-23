@@ -20,6 +20,11 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
+  Future<void> signInWithGoogle() {
+    return _firebaseDatasource.signInWithGoogle();
+  }
+
+  @override
   Future<void> createUserWithEmail(String email, String password) {
     return _firebaseDatasource.createUserWithEmail(email, password);
   }

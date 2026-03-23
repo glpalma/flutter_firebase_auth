@@ -89,6 +89,13 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                           child: const Text('Sign In'),
                         ),
+                  const SizedBox(height: 12),
+                  OutlinedButton(
+                    onPressed: _viewModel.isLoading
+                        ? null
+                        : () => _viewModel.signInWithGoogle(),
+                    child: const Text('Sign in with Google'),
+                  ),
                   const SizedBox(height: 16),
                   TextButton(
                     onPressed: () => Navigator.of(context).push(

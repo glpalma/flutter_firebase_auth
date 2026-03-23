@@ -1,5 +1,4 @@
 import 'package:flutter/foundation.dart';
-import 'package:flutter_firebase_auth/core/error/failures.dart';
 import 'package:flutter_firebase_auth/features/auth/domain/usecases/sign_in_with_email.dart';
 import 'package:flutter_firebase_auth/features/auth/domain/usecases/sign_up_with_email.dart';
 
